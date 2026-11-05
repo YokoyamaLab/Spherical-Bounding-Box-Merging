@@ -1,10 +1,10 @@
 import numpy as np
 
-from data_types import SphericalDetection, ProjectionOptions, ThresholdOptions
-from detector import DetectorProtocol
-from projection import split_erp
-from spherical_candidates import to_spherical_candidates
-from merge import merge
+from .data_types import SphericalDetection, ProjectionOptions, ThresholdOptions
+from .detector import DetectorProtocol
+from .projection import split_erp
+from .spherical_candidates import to_spherical_candidates
+from .merge import merge
 
 def detect_panorama(
     erp_image: np.ndarray,

@@ -15,12 +15,50 @@ It supports bounding-box detections and instance masks. **The core does not depe
 
 Requires Python 3.10+.
 
+Install directly from GitHub (Git is required):
+
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install "git+https://github.com/YokoyamaLab/Spherical-Bounding-Box-Merging.git"
+```
+
+The distribution name is `spherical-bounding-box-merging`; the import name is `spherical_bbox_merging`. Runtime dependencies are NumPy and OpenCV (`opencv-python-headless`), installed automatically. This package is not published on PyPI.
+
+```python
+from spherical_bbox_merging import (
+    detect_panorama,
+    Detection,
+    DetectorProtocol,
+    ProjectionOptions,
+    ThresholdOptions,
+    SphericalBBox,
+    SphericalDetection,
+)
+```
+
+For local development and the synthetic example, clone the repository and install in editable mode:
+
+```bash
+git clone https://github.com/YokoyamaLab/Spherical-Bounding-Box-Merging.git
+cd Spherical-Bounding-Box-Merging
+python -m pip install -e .
 python main.py
 ```
 
-`main.py` runs a synthetic detector on a generated panorama. It checks the pipeline without performing real object recognition or downloading model weights.
+`main.py` runs a synthetic detector on a generated panorama. It checks the pipeline without performing real object recognition or downloading model weights. This example and the tests remain in the repository; the installed library lives in `src/spherical_bbox_merging/`.
+
+Run all 42 unit tests from the repository root after installation:
+
+```bash
+python -m unittest discover -v
+```
+
+To build a wheel locally without publishing it:
+
+```bash
+python -m pip wheel --no-deps . --wheel-dir dist
+```
+
+Package metadata and dependencies are defined in `pyproject.toml`. For compatibility, `python -m pip install -r requirements.txt` also installs the local package in editable mode.
 
 To use a real model, provide an object with a `detect(image) -> list[Detection]` method to `detect_panorama()`. See [Using your own detector](docs/detector.md).
 

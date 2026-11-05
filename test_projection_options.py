@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 
-from data_types import ProjectionOptions
-from projection import split_erp
+from spherical_bbox_merging import ProjectionOptions
+from spherical_bbox_merging.projection import split_erp
 
 
 class TestProjectionOptions(unittest.TestCase):

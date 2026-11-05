@@ -1,8 +1,8 @@
 """Run a synthetic example without a model or weights: python main.py."""
 import numpy as np
 
-from data_types import Detection, ProjectionOptions, ThresholdOptions
-from pipeline import detect_panorama
+from spherical_bbox_merging import Detection, ProjectionOptions, ThresholdOptions
+from spherical_bbox_merging import detect_panorama
 
 
 class CenterBoxDetector:

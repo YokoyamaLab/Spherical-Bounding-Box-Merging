@@ -1,7 +1,7 @@
 from collections.abc import Callable
-from data_types import SphericalBBox, SphericalCandidate, ThresholdOptions, SphericalDetection
+from .data_types import SphericalBBox, SphericalCandidate, ThresholdOptions, SphericalDetection
 from collections import defaultdict
-from spherical_iou import spherical_iou, spherical_ioa
+from .spherical_iou import spherical_iou, spherical_ioa
 import math
 
 def greedy_cluster(

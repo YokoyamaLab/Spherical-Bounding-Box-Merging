@@ -7,9 +7,9 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 
-from data_types import Detection
-import spherical_bbox as sb
-from spherical_candidates import to_spherical_candidates
+from spherical_bbox_merging import Detection
+from spherical_bbox_merging import spherical_bbox as sb
+from spherical_bbox_merging.spherical_candidates import to_spherical_candidates
 from test_spherical_bbox import ERP_SHAPE, pinhole_view
 
 

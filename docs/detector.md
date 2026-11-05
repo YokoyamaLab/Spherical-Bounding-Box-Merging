@@ -2,9 +2,11 @@
 
 The pipeline works with **any planar object detector** that accepts a projected view and returns the common `Detection` format. No inheritance is required.
 
+First [install the package](../README.md#quick-start). Your detector code can then run from any directory.
+
 ```python
 import numpy as np
-from data_types import Detection
+from spherical_bbox_merging import Detection
 
 class MyDetector:
     def detect(self, image: np.ndarray) -> list[Detection]:
@@ -23,8 +25,8 @@ The example above returns a fixed box for demonstration; it does **not** perform
 
 ```python
 import cv2
-from data_types import ProjectionOptions, ThresholdOptions
-from pipeline import detect_panorama
+from spherical_bbox_merging import ProjectionOptions, ThresholdOptions
+from spherical_bbox_merging import detect_panorama
 
 panorama = cv2.imread("panorama.jpg")
 if panorama is None:

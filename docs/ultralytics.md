@@ -2,13 +2,13 @@
 
 The library itself is **detector-agnostic** and does not import or install Ultralytics. This example shows how a separately installed YOLO model can provide the same `Detection` format for **bbox detection or instance segmentation**.
 
-Install Ultralytics separately:
+First [install this package](../README.md#quick-start), then install Ultralytics separately:
 
 ```bash
 python -m pip install ultralytics
 ```
 
-Save the code below as `user_yolo.py` **in the repository root**, then run it with your own ERP image and local detection or segmentation weights:
+Save the code below as `user_yolo.py` in any directory, then run it with your own ERP image and local detection or segmentation weights:
 
 ```bash
 python user_yolo.py /path/to/panorama.jpg /path/to/model.pt
@@ -22,8 +22,8 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
-from data_types import Detection, ProjectionOptions, ThresholdOptions
-from pipeline import detect_panorama
+from spherical_bbox_merging import Detection, ProjectionOptions, ThresholdOptions
+from spherical_bbox_merging import detect_panorama
 
 
 class YOLODetector:

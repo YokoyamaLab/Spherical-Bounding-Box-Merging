@@ -1,14 +1,14 @@
 import math
 import numpy as np
 
-from data_types import (
+from .data_types import (
     Detection,
     ProjectedView,
     SphericalBBox,
     SphericalCandidate,
     SphericalDetection,
 )
-from spherical_bbox import bbox_to_spherical_bbox
+from .spherical_bbox import bbox_to_spherical_bbox
 
 
 def to_spherical_candidates(

@@ -1,7 +1,7 @@
 
 import numpy as np
 
-from data_types import SphericalBBox
+from .data_types import SphericalBBox
 
 # All geometry uses unit vectors and radians.
 _EPS = 1e-10

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spherical-bounding-box-merging"
+version = "0.1.0"
+description = "360-degree object detection with planar detectors and spherical bounding-box merging"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+    "numpy>=1.24",
+    "opencv-python-headless>=4.8,<5",
+]
+
+[project.urls]
+Repository = "https://github.com/YokoyamaLab/Spherical-Bounding-Box-Merging"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["spherical_bbox_merging*"]
+
