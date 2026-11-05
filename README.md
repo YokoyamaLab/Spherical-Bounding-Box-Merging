@@ -1,0 +1,41 @@
+# Spherical Bounding Box Merging
+
+**360° object detection with your choice of planar object detector.**
+
+This Python implementation applies a planar detector to an equirectangular panorama (ERP) by:
+
+1. Projecting the panorama into perspective views.
+2. Running a **user-provided detector** on each view.
+3. Converting detections into spherical bounding boxes.
+4. Merging overlapping boxes across views using spherical IoU and IoA.
+
+It supports bounding-box detections and instance masks. **The core does not depend on YOLO, Ultralytics, or PyTorch.**
+
+## Quick start
+
+Requires Python 3.10+.
+
+```bash
+python -m pip install -r requirements.txt
+python main.py
+```
+
+`main.py` runs a synthetic detector on a generated panorama. It checks the pipeline without performing real object recognition or downloading model weights.
+
+To use a real model, provide an object with a `detect(image) -> list[Detection]` method to `detect_panorama()`. See [Using your own detector](docs/detector.md).
+
+## Documentation
+
+- [Detector interface and output format](docs/detector.md) — connect your own model; bbox and mask conventions
+- [Configuration and limitations](docs/configuration.md) — projection, merging thresholds, and supported ranges
+- [Ultralytics YOLO example](docs/ultralytics.md) — optional third-party integration for bbox and segmentation models
+
+## Research
+
+This repository accompanies **Hiroto Igeta and Shohei Yokoyama**, *“Spherical Bounding Box Merging for 360-Degree Object Detection with Planar Detectors,”* presented at **SNPD 2026** and awarded **Best Paper** ([Tokyo Metropolitan University announcement](https://www.sd.tmu.ac.jp/news/prize/12671.html)).
+
+The Springer publication is **not yet available**. Its DOI and final citation will be added after publication. The spherical IoU calculation is independently implemented from the mathematical method of [Dai et al., *Unbiased IoU for Spherical Image Object Detection* (AAAI 2022)](https://doi.org/10.1609/aaai.v36i1.19929).
+
+## License
+
+The original code is licensed under the [MIT License](LICENSE). Third-party detectors, model weights, datasets, and the research paper are not covered by this license.
