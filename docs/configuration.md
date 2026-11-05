@@ -3,7 +3,7 @@
 Pass `ProjectionOptions` and `ThresholdOptions` to `detect_panorama()`:
 
 ```python
-from data_types import ProjectionOptions, ThresholdOptions
+from spherical_bbox_merging import ProjectionOptions, ThresholdOptions
 
 projection = ProjectionOptions()
 thresholds = ThresholdOptions()
@@ -32,9 +32,10 @@ Merging runs independently per class, first with spherical IoU and then with sph
 
 ## Tests
 
-From the repository root:
+From the repository root, install the package before running the tests:
 
 ```bash
+python -m pip install -e .
 python -m unittest -v test_projection_options test_detector_protocol test_spherical_bbox test_spherical_mask
 ```
 

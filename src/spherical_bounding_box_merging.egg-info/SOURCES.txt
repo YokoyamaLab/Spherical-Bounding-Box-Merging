@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/spherical_bbox_merging/__init__.py
+src/spherical_bbox_merging/data_types.py
+src/spherical_bbox_merging/detector.py
+src/spherical_bbox_merging/merge.py
+src/spherical_bbox_merging/pipeline.py
+src/spherical_bbox_merging/projection.py
+src/spherical_bbox_merging/spherical_bbox.py
+src/spherical_bbox_merging/spherical_candidates.py
+src/spherical_bbox_merging/spherical_iou.py
+src/spherical_bounding_box_merging.egg-info/PKG-INFO
+src/spherical_bounding_box_merging.egg-info/SOURCES.txt
+src/spherical_bounding_box_merging.egg-info/dependency_links.txt
+src/spherical_bounding_box_merging.egg-info/requires.txt
+src/spherical_bounding_box_merging.egg-info/top_level.txt

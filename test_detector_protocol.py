@@ -10,10 +10,10 @@ from unittest.mock import patch
 
 import numpy as np
 
-from data_types import Detection, ProjectionOptions, ThresholdOptions
-from detector import DetectorProtocol
-import pipeline
-from projection import split_erp
+from spherical_bbox_merging import Detection, ProjectionOptions, ThresholdOptions
+from spherical_bbox_merging import DetectorProtocol
+from spherical_bbox_merging import pipeline
+from spherical_bbox_merging.projection import split_erp
 
 
 class SyntheticDetector:
@@ -107,14 +107,17 @@ class DetectorProtocolTests(unittest.TestCase):
         merge.assert_called_once()
 
     def test_extracted_core_imports_and_runs_with_model_imports_blocked(self):
-        # Copy exactly the public modules: imports cannot accidentally rely on
+        # Copy the package and example: imports cannot accidentally rely on
         # research/, the experiment runner, test fixtures, or the repository.
         modules = ("data_types", "detector", "pipeline", "projection", "spherical_candidates",
-                   "spherical_bbox", "spherical_iou", "merge", "main")
+                   "spherical_bbox", "spherical_iou", "merge")
+        modules = tuple(f"spherical_bbox_merging.{name}" for name in modules) + ("main",)
         root = Path(__file__).resolve().parent
         with tempfile.TemporaryDirectory() as temporary:
-            for name in modules:
-                shutil.copyfile(root / f"{name}.py", Path(temporary) / f"{name}.py")
+            shutil.copytree(root / "src" / "spherical_bbox_merging",
+                            Path(temporary) / "spherical_bbox_merging",
+                            ignore=shutil.ignore_patterns("__pycache__"))
+            shutil.copyfile(root / "main.py", Path(temporary) / "main.py")
             code = '''
 import importlib
 import importlib.abc
@@ -129,9 +132,9 @@ sys.meta_path.insert(0, BlockModels())
 for name in sys.argv[2:]:
     importlib.import_module(name)
 import numpy as np
-from data_types import Detection, ProjectionOptions, ThresholdOptions
-from detector import DetectorProtocol
-from pipeline import detect_panorama
+from spherical_bbox_merging import Detection, ProjectionOptions, ThresholdOptions
+from spherical_bbox_merging import DetectorProtocol
+from spherical_bbox_merging import detect_panorama
 class EmptyDetector:
     def detect(self, image: np.ndarray) -> list[Detection]:
         return []

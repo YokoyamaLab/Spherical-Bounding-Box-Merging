@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from data_types import ProjectionOptions, ProjectedView
+from .data_types import ProjectionOptions, ProjectedView
 
 
 def split_erp(

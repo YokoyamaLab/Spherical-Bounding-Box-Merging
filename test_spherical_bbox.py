@@ -10,11 +10,11 @@ import unittest
 
 import numpy as np
 
-from data_types import Detection, ProjectedView, SphericalBBox
-from spherical_bbox import (
+from spherical_bbox_merging import Detection, ProjectedView, SphericalBBox
+from spherical_bbox_merging.spherical_bbox import (
     _bbox_sample_pixels, _local_basis, bbox_to_spherical_bbox, sample_bbox_boundary,
 )
-from spherical_candidates import to_spherical_candidates
+from spherical_bbox_merging.spherical_candidates import to_spherical_candidates
 
 
 ERP_SHAPE = (1000, 2000, 3)

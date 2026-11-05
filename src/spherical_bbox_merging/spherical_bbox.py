@@ -11,7 +11,7 @@ import math
 import cv2
 import numpy as np
 
-from data_types import ProjectedView, SphericalBBox
+from .data_types import ProjectedView, SphericalBBox
 
 
 def bbox_to_spherical_bbox(

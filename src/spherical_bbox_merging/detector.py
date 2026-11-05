@@ -7,7 +7,7 @@ from typing import Protocol
 
 import numpy as np
 
-from data_types import Detection
+from .data_types import Detection
 
 
 class DetectorProtocol(Protocol):
