@@ -2,7 +2,7 @@
 
 The library itself is **detector-agnostic** and does not import or install Ultralytics. This example shows how a separately installed YOLO model can provide the same `Detection` format for **bbox detection or instance segmentation**.
 
-First [install this package](../README.md#quick-start), then install Ultralytics separately:
+First [install this package](../README.md#quick-start), then install Ultralytics separately in the same Python environment:
 
 ```bash
 python -m pip install ultralytics
@@ -22,8 +22,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
-from spherical_bbox_merging import Detection, ProjectionOptions, ThresholdOptions
-from spherical_bbox_merging import detect_panorama
+from spherical_bbox_merging import detect_panorama, Detection, ProjectionOptions, ThresholdOptions
 
 
 class YOLODetector:

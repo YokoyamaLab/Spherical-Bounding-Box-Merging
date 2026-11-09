@@ -1,6 +1,6 @@
 # Configuration and limitations
 
-Pass `ProjectionOptions` and `ThresholdOptions` to `detect_panorama()`:
+After [installing the package](../README.md#quick-start), pass `ProjectionOptions` and `ThresholdOptions` to `detect_panorama()`. Both option objects are required arguments; constructing them without arguments selects the defaults below:
 
 ```python
 from spherical_bbox_merging import ProjectionOptions, ThresholdOptions
@@ -32,10 +32,9 @@ Merging runs independently per class, first with spherical IoU and then with sph
 
 ## Tests
 
-From the repository root, install the package before running the tests:
+Tests are included in the repository checkout, not in the installed package. Follow the [local development setup](../README.md#local-development-and-tests), then run from the repository root:
 
 ```bash
-python -m pip install -e .
 python -m unittest -v test_projection_options test_detector_protocol test_spherical_bbox test_spherical_mask
 ```
 
