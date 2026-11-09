@@ -23,10 +23,11 @@ The example above returns a fixed box for demonstration; it does **not** perform
 
 ## Call the pipeline
 
+Add this below the `MyDetector` definition above and run it in the Python environment where you installed the package. Replace `panorama.jpg` with your ERP image path:
+
 ```python
 import cv2
-from spherical_bbox_merging import ProjectionOptions, ThresholdOptions
-from spherical_bbox_merging import detect_panorama
+from spherical_bbox_merging import detect_panorama, ProjectionOptions, ThresholdOptions
 
 panorama = cv2.imread("panorama.jpg")
 if panorama is None:

@@ -15,6 +15,17 @@ It supports bounding-box detections and instance masks. **The core does not depe
 
 Requires Python 3.10+.
 
+### Installation
+
+Use a virtual environment for installation. For example, on Linux/macOS:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+On Windows PowerShell, activate it with `.venv\Scripts\Activate.ps1` instead.
+
 Install directly from GitHub (Git is required):
 
 ```bash
@@ -23,19 +34,47 @@ python -m pip install "git+https://github.com/YokoyamaLab/Spherical-Bounding-Box
 
 The distribution name is `spherical-bounding-box-merging`; the import name is `spherical_bbox_merging`. Runtime dependencies are NumPy and OpenCV (`opencv-python-headless`), installed automatically. This package is not published on PyPI.
 
+### Minimal example
+
+After installation, the following example runs from any directory, without model weights or an input image:
+
 ```python
+import numpy as np
+
 from spherical_bbox_merging import (
     detect_panorama,
     Detection,
-    DetectorProtocol,
     ProjectionOptions,
     ThresholdOptions,
-    SphericalBBox,
-    SphericalDetection,
 )
+
+
+class CenterBoxDetector:
+    def detect(self, image: np.ndarray) -> list[Detection]:
+        height, width = image.shape[:2]
+        return [Detection(0, 1.0, (width / 4, height / 4, 3 * width / 4, 3 * height / 4))]
+
+
+panorama = np.zeros((64, 128, 3), dtype=np.uint8)
+results = detect_panorama(
+    panorama,
+    CenterBoxDetector(),
+    ProjectionOptions(width=64, height=64),
+    ThresholdOptions(),
+)
+for detection in results:
+    print(detection)
 ```
 
-For local development and the synthetic example, clone the repository and install in editable mode:
+This synthetic detector returns a fixed box; it does not perform object recognition. The small projection size keeps the example fast. To use a real model, provide an object with a `detect(image) -> list[Detection]` method. See [Using your own detector](docs/detector.md).
+
+`detect_panorama()` returns `list[SphericalDetection]`. `DetectorProtocol`, `SphericalBBox`, `SphericalDetection`, `ProjectedView`, and `SphericalCandidate` can also be imported directly from `spherical_bbox_merging`.
+
+If you used the earlier repository layout, update imports such as `from data_types import Detection` and `from pipeline import detect_panorama` to use `from spherical_bbox_merging import ...`. Lower-level functions are available through package modules, for example `from spherical_bbox_merging.spherical_iou import spherical_iou`.
+
+## Local development and tests
+
+Clone the repository and install in editable mode using your virtual environment:
 
 ```bash
 git clone https://github.com/YokoyamaLab/Spherical-Bounding-Box-Merging.git
@@ -44,7 +83,7 @@ python -m pip install -e .
 python main.py
 ```
 
-`main.py` runs a synthetic detector on a generated panorama. It checks the pipeline without performing real object recognition or downloading model weights. This example and the tests remain in the repository; the installed library lives in `src/spherical_bbox_merging/`.
+[`main.py`](main.py) runs the same synthetic example. The example script and tests are available in the repository checkout and are not installed by pip. Library source files live in `src/spherical_bbox_merging/`; editable installation makes changes there available to your Python environment.
 
 Run all 42 unit tests from the repository root after installation:
 
@@ -52,15 +91,23 @@ Run all 42 unit tests from the repository root after installation:
 python -m unittest discover -v
 ```
 
-To build a wheel locally without publishing it:
+Package metadata and dependencies are defined in [`pyproject.toml`](pyproject.toml). From the repository root, `python -m pip install -r requirements.txt` also installs the local package in editable mode. Running the scripts and tests requires installing the package first.
+
+## Build and install a wheel
+
+From the repository root, build a wheel locally without publishing it:
 
 ```bash
 python -m pip wheel --no-deps . --wheel-dir dist
 ```
 
-Package metadata and dependencies are defined in `pyproject.toml`. For compatibility, `python -m pip install -r requirements.txt` also installs the local package in editable mode.
+Install the resulting wheel in the target Python environment:
 
-To use a real model, provide an object with a `detect(image) -> list[Detection]` method to `detect_panorama()`. See [Using your own detector](docs/detector.md).
+```bash
+python -m pip install dist/spherical_bounding_box_merging-0.1.0-py3-none-any.whl
+```
+
+The filename reflects the version in `pyproject.toml`. NumPy and OpenCV are installed as dependencies; they are not bundled in this wheel.
 
 ## Documentation
 
