@@ -117,9 +117,13 @@ The filename reflects the version in `pyproject.toml`. NumPy and OpenCV are inst
 
 ## Research
 
-This repository accompanies **Hiroto Igeta and Shohei Yokoyama**, *“Spherical Bounding Box Merging for 360-Degree Object Detection with Planar Detectors,”* presented at **SNPD 2026** and awarded **Best Paper** ([Tokyo Metropolitan University announcement](https://www.sd.tmu.ac.jp/news/prize/12671.html)).
+This repository accompanies the paper by **Hiroto Igeta and Shohei Yokoyama**, *“Spherical Bounding Box Merging for 360-Degree Object Detection with Planar Detectors,”* presented at **SNPD 2026** and awarded **Best Paper** ([Tokyo Metropolitan University announcement](https://www.sd.tmu.ac.jp/news/prize/12671.html)).
 
-The Springer publication is **not yet available**. Its DOI and final citation will be added after publication. The spherical IoU calculation is independently implemented from the mathematical method of [Dai et al., *Unbiased IoU for Spherical Image Object Detection* (AAAI 2022)](https://doi.org/10.1609/aaai.v36i1.19929).
+The experiments reported in the paper were conducted using a C++ implementation. This repository provides a Python reimplementation of the proposed method, designed for easier integration with various planar object detectors. The original experimental code and evaluation environment are not included. Consequently, the processing times reported in the paper do not represent the performance of this Python implementation.
+
+The Springer publication is **not yet available**. Its DOI and final citation will be added after publication.
+
+The spherical IoU calculation is independently implemented based on the mathematical method proposed by [Dai et al., *Unbiased IoU for Spherical Image Object Detection* (AAAI 2022)](https://doi.org/10.1609/aaai.v36i1.19929).
 
 ## License
 
